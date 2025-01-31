@@ -4,6 +4,8 @@ from typing import List
 from sentence_transformers import SentenceTransformer
 import uvicorn
 
+from app import embeddings
+
 # Initialize FastAPI app
 app = FastAPI(title="Embedding Service")
 
@@ -27,6 +29,19 @@ async def create_embeddings(request: EmbeddingRequest):
         return {
             "embeddings": embeddings.tolist(),
             "dimensions": len(embeddings[0])
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+    
+@app.post("/embed2", response_model=EmbeddingResponse)
+async def create_embeddings(request: EmbeddingRequest):
+    try:
+        # Generate embeddings
+        generated_embeddings = embeddings.get_embeddings_fixed_dim(request.texts, 768)
+        
+        return {
+            "embeddings": generated_embeddings,
+            "dimensions": len(generated_embeddings[0])
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

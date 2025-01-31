@@ -1,11 +1,11 @@
 meta {
-  name: Create embedding
+  name: Create embedding 768 dim
   type: http
   seq: 2
 }
 
 post {
-  url: http://localhost:8001/embed
+  url: {{host}}:{{port}}/embed2
   body: json
   auth: none
 }
@@ -15,7 +15,6 @@ body:json {
     "texts": [
       "Ala ma kota",
       "I am Bronson"
-      ],
-    "dimensions" : "10"
+      ]
   }
 }

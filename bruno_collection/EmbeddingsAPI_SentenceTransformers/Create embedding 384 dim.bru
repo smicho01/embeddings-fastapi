@@ -1,0 +1,20 @@
+meta {
+  name: Create embedding 384 dim
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{host}}:{{port}}/embed
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "texts": [
+      "Ala ma kota",
+      "I am Bronson"
+      ]
+  }
+}
