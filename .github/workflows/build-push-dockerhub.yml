@@ -20,7 +20,7 @@ jobs:
       - name: Set up Docker Hub login
         uses: docker/login-action@v2
         with:
-          username: ${{ secrets.DOCKER_USER_NAME }}
+          username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Extract tag from branch name
@@ -37,8 +37,8 @@ jobs:
           file: ./Dockerfile
           push: true
           tags: |
-            docker.io/${{ secrets.DOCKER_USER_NAME }}/embeddings-fastapi:${{ env.TAG }}
-            docker.io/${{ secrets.DOCKER_USER_NAME }}/embeddings-fastapi:latest
+            docker.io/${{ secrets.DOCKER_USERNAME }}/embeddings-fastapi:${{ env.TAG }}
+            docker.io/${{ secrets.DOCKER_USERNAME }}/embeddings-fastapi:latest
           platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,ref=docker.io/${{ secrets.DOCKER_USER_NAME }}/embeddings-fastapi:buildcache
-          cache-to: type=registry,ref=docker.io/${{ secrets.DOCKER_USER_NAME }}/embeddings-fastapi:buildcache,mode=max
+          cache-from: type=registry,ref=docker.io/${{ secrets.DOCKER_USERNAME }}/embeddings-fastapi:buildcache
+          cache-to: type=registry,ref=docker.io/${{ secrets.DOCKER_USERNAME }}/embeddings-fastapi:buildcache,mode=max
